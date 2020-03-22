@@ -1,4 +1,7 @@
 # Mobilalkalmazás fejlesztés alapjai 2020
+
+Csapat név: Meltdowning spectre
+
 Máté Patrik (F3SZ3G)
 Kapitány Rudolf (STZIGQ)
 
