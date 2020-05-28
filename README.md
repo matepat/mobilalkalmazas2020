@@ -15,5 +15,7 @@ Lesz egy áttekintő nézet, ahol statisztikai adatok lesznek róla írva, vissz
 ## Hogyan tudod futtatni magadnál?
 
 Expo & npm kell hozzá: npm install -g expo-cli
+
 Ezután futtasd ezzel: expo start
+
 Telefonon az Expo alkalmazással meg tudod lesni, ha a devablakból bescanneled a QR kódot.
