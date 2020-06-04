@@ -7,6 +7,8 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import AppStyles from './styles.js';
 import NewPage from "./src/pages/NewPage";
 import TestPage from "./src/pages/TestPage";
+import LoginPage from "./src/pages/LoginPage";
+import RegistrationPage from "./src/pages/RegistrationPage";
 
 const Drawer = createDrawerNavigator();
 
@@ -18,7 +20,9 @@ export default function App() {
               <Drawer.Screen name="Cél beállítása" component={TestPage} />
               <Drawer.Screen name="Mai teljesítmény" component={NewPage} />
               <Drawer.Screen name="Beállítások" component={NewPage} />
-              <Drawer.Screen name="Kijelentkezés" component={NewPage} />
+              <Drawer.Screen name="Kijelentkezés" component={LoginPage} />
+              {/*TODO kivenni a regisztrációt a drawerből és a login page megfelelő gombjára rakni */}
+              <Drawer.Screen name="Regisztráció" component={RegistrationPage} />
           </Drawer.Navigator>
       </NavigationContainer>
   );
