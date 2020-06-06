@@ -7,7 +7,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import AppStyles from './styles.js';
 import NewPage from "./src/pages/NewPage";
 import TestPage from "./src/pages/TestPage";
-import LoginPage from "./src/pages/LoginPage";
+import LoginPage from "./src/pages/Login/LoginPage";
 import RegistrationPage from "./src/pages/Registration/RegistrationPage";
 
 const Drawer = createDrawerNavigator();

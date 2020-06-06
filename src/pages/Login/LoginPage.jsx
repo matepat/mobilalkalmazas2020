@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import { Text, View, TextInput, ScrollView } from 'react-native';
+import { View, TextInput, ScrollView } from 'react-native';
 
 import AppStyles from "../../../styles";
-import RegistrationStyles from "./RegistrationStyles";
+import LoginStyles from "./LoginStyles";
+
 
 import Container from '../../components/Container';
 import Button from '../../components/Button';
 import Label from '../../components/Label';
 
-class RegistrationPage extends Component {
+class LoginPage extends Component {
     render() {
         return (
             <ScrollView style={AppStyles.scroll}>
@@ -19,55 +20,39 @@ class RegistrationPage extends Component {
                     />
                 </Container>
                 <Container>
-                    <Label text="Password" />
+                    <Label text="Jleszó" />
                     <TextInput
                         secureTextEntry={true}
                         style={AppStyles.textInput}
                     />
                 </Container>
-                <Container>
-                    <Label text="Vezetéknév" />
-                    <TextInput
-                        style={AppStyles.textInput}
-                    />
-                </Container>
-                <Container>
-                    <Label text="Keresztnév" />
-                    <TextInput
-                        style={AppStyles.textInput}
-                    />
-                </Container>
-
-                {/* TODO Kell date picker a születési dátumhoz,
-                 valami check box szerű a nem kiválasztáshoz,
-                 magassághoz szám */}
 
                 <View style={AppStyles.footer}>
+                    <Container>
+                        <Button
+                            label="Bejelentkezés"
+                            styles={{button: AppStyles.primaryButton, label: AppStyles.buttonWhiteText}}
+                            onPress={this.login.bind(this)} />
+                    </Container>
+
                     <Container>
                         <Button
                             label="Regisztráció"
                             styles={{button: AppStyles.primaryButton, label: AppStyles.buttonWhiteText}}
                             onPress={this.registration.bind(this)} />
                     </Container>
-
-                    <Container>
-                        <Button
-                            label="Vissza"
-                            styles={{button: AppStyles.primaryButton, label: AppStyles.buttonWhiteText}}
-                            onPress={this.back.bind(this)} />
-                    </Container>
                 </View>
             </ScrollView>
         );
     }
 
-    back(){
-        alert('back');
+    login(){
+        alert('login')
     }
 
     registration(){
-        alert('reg');
+        this.props.navigation.navigate('RegistrationPage');
     }
 }
 
-export default RegistrationPage;
+export default LoginPage;
