@@ -7,11 +7,13 @@ import RegistrationStyles from "./RegistrationStyles";
 import Container from '../../components/Container/Container';
 import Button from '../../components/Button/Button';
 import Label from '../../components/Label/Label';
+import Header from "../../components/Header/Header";
 
 class RegistrationPage extends Component {
     render() {
         return (
             <View style={AppStyles.container}>
+                <Header label={'Regisztráció'} />
                 <ScrollView style={AppStyles.scroll}>
                     <Container>
                         <Label text="E-mail" />
