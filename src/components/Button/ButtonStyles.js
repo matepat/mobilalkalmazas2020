@@ -8,15 +8,18 @@ const ButtonStyles = StyleSheet.create({
         borderRadius: 5,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#3498db',
-        shadowColor: '#2980b9',
+        backgroundColor: '#25CD36',
+        shadowColor: '#1AE12E',
         shadowOpacity: 0.2,
         shadowOffset: { height: 1, width: 0 },
         shadowRadius: 2,
+        height: 65,
+        width: '60%',
+        alignSelf: 'center',
+        marginTop: 60,
     },
     text:{
-        fontSize: 16,
-        textTransform: 'uppercase',
+        fontSize: 18,
         color: '#FFFFFF',
     }
 });

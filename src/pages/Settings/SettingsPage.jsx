@@ -1,46 +1,32 @@
 import React, { Component } from 'react';
-import { Text, View, TextInput, ScrollView } from 'react-native';
-import RadioForm from 'react-native-simple-radio-button';
-import DatePicker from 'react-native-datepicker';
-
+import { View, TextInput, ScrollView } from 'react-native';
 
 import AppStyles from "../../../styles";
-import RegistrationStyles from "./RegistrationStyles";
+import SettingsStyle from "./SettingsStyle";
 
 import Container from '../../components/Container/Container';
 import Button from '../../components/Button/Button';
 import Label from '../../components/Label/Label';
 import Header from "../../components/Header/Header";
+import RadioForm from "react-native-simple-radio-button";
+import DatePicker from "react-native-datepicker";
 
-class RegistrationPage extends Component {
-
-    radio_props = [
-        {label: 'Férfi', value: 0},
-        {label: 'Nő', value: 1}
-    ];
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            gender: 0,
-            date: "2000-01-01",
-        }
-    }
-
+class SettingsPage extends Component {
     render() {
         return (
             <View style={AppStyles.container}>
-                <Header label={'Kérem töltse ki adatait'} />
+                <Header label={'Mai teljesítmény'} menu={true} />
                 <ScrollView style={AppStyles.scroll}>
                     <Container>
-                        <Label text="E-mail" />
+                        <Label text="Új jelszó" />
                         <TextInput
-                            placeholder={"teszt@gmail.com"}
+                            placeholder={"***********"}
+                            secureTextEntry={true}
                             style={AppStyles.textInput}
                         />
                     </Container>
                     <Container>
-                        <Label text="Jelszó" />
+                        <Label text="Új jelszó ismét" />
                         <TextInput
                             placeholder={"***********"}
                             secureTextEntry={true}
@@ -61,10 +47,9 @@ class RegistrationPage extends Component {
                             style={AppStyles.textInput}
                         />
                     </Container>
-
                     <Container>
                         <Label text="Nem" />
-                        <RadioForm style={RegistrationStyles.radio} formHorizontal={true} radio_props={this.radio_props} initial={0} onPress={(value) => this.state.gender=value}/>
+                        <RadioForm style={AppStyles.radio} formHorizontal={true} radio_props={this.radio_props} initial={0} onPress={(value) => this.state.gender=value}/>
                     </Container>
 
                     <Container>
@@ -79,7 +64,7 @@ class RegistrationPage extends Component {
                     <Container>
                         <Label text="Születési dátum"/>
                         <DatePicker
-                            style={RegistrationStyles.datePicker}
+                            style={AppStyles.datePicker}
                             date={this.state.date}
                             mode="date"
                             placeholder={this.state.date}
@@ -95,17 +80,13 @@ class RegistrationPage extends Component {
 
                     <Container>
                         <Button
-                            label="Regisztráció"
+                            label="Mentés"
                             onPress={this.registration.bind(this)} />
                     </Container>
                 </ScrollView>
             </View>
         );
     }
-
-    registration(){
-        alert('reg');
-    }
 }
 
-export default RegistrationPage;
+export default SettingsPage;
