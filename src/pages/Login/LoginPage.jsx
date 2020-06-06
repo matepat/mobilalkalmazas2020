@@ -5,9 +5,9 @@ import AppStyles from "../../../styles";
 import LoginStyles from "./LoginStyles";
 
 
-import Container from '../../components/Container';
-import Button from '../../components/Button';
-import Label from '../../components/Label';
+import Container from '../../components/Container/Container';
+import Button from '../../components/Button/Button';
+import Label from '../../components/Label/Label';
 
 class LoginPage extends Component {
     render() {

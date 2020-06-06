@@ -1,11 +1,10 @@
 import { StyleSheet } from "react-native";
+import Constants from "expo-constants";
 
 const AppStyles = StyleSheet.create({
     container: {
-        flex: 1,
+        marginTop: Constants.statusBarHeight,
         backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
     },
     scroll: {
         backgroundColor: '#E1D7D8',
