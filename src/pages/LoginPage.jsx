@@ -12,7 +12,7 @@ import Container from '../components/Container';
 import Button from '../components/Button';
 import Label from '../components/Label';
 
-import RegistrationPage from "./RegistrationPage";
+import RegistrationPage from "./Registration/RegistrationPage";
 
 export default class LoginPage extends Component {
     render() {
