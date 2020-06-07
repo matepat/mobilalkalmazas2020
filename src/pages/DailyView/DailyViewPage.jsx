@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import {View, TextInput, ScrollView, AsyncStorage} from 'react-native';
+import {View, ScrollView, AsyncStorage} from 'react-native';
 
 import AppStyles from "../../../styles";
 import DailyViewStyle from "./DailyViewStyle";
 
-
 import Container from '../../components/Container/Container';
-import Button from '../../components/Button/Button';
 import Label from '../../components/Label/Label';
 import Header from "../../components/Header/Header";
 
@@ -37,7 +35,7 @@ class DailyViewPage extends Component {
     render() {
         return (
             <View style={AppStyles.container}>
-                <Header label={'Mai teljesítmény'} menu={true} />
+                <Header label={'Mai teljesítmény'} onPress={() => this.props.navigation.openDrawer()} drawer={true}/>
                 <ScrollView style={AppStyles.scroll}>
                     <Container>
                         <Label text="Feltöltés alatt" />

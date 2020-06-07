@@ -33,7 +33,7 @@ class SetGoalPage extends Component {
     render() {
         return (
             <View style={AppStyles.container}>
-                <Header label={'Mai teljesítmény'} menu={true} />
+                <Header label={'Cél beállítása'} onPress={() => this.props.navigation.openDrawer()} drawer={true}/>
                 <ScrollView style={AppStyles.scroll}>
                     <Container>
                         <Label text="Jelenlegi súly" />

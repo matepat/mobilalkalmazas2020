@@ -38,7 +38,7 @@ const AppStyles = StyleSheet.create({
     },
     datePicker:{
         width: '100%',
-    }
+    },
 });
 
 export default AppStyles;

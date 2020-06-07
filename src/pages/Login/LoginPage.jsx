@@ -4,7 +4,6 @@ import { View, TextInput, ScrollView,AsyncStorage } from 'react-native';
 import AppStyles from "../../../styles";
 import LoginStyles from "./LoginStyles";
 
-
 import Container from '../../components/Container/Container';
 import Button from '../../components/Button/Button';
 import Label from '../../components/Label/Label';
@@ -71,17 +70,20 @@ class LoginPage extends Component {
             await AsyncStorage.setItem("logged_in_user", JSON.stringify(user) )
                 .then( ()=>{
                     console.log("Login was successfully");
+                    alert('Sikeres bejelentkezés');
+                    this.props.navigation.navigate('Áttekintés');
                 } )
                 .catch( ()=>{
                     console.log("There was an error to login");
                 } )
         } else {
             console.log("Invalid email/password");
+            alert('Sikertelen bejelentkezés');
         }
     }
 
     registration(){
-        this.props.navigation.navigate('RegistrationPage');
+        this.props.navigation.navigate('Regisztráció');
     }
 }
 

@@ -1,15 +1,24 @@
 import React, { Component } from 'react';
-import { Text, View, TextInput, ScrollView,AsyncStorage  } from 'react-native';
+import { View, TextInput, ScrollView, AsyncStorage } from 'react-native';
 import AppStyles from "../../../styles";
 import Header from "../../components/Header/Header";
 import Container from "../../components/Container/Container";
 import Label from "../../components/Label/Label";
-import RadioForm from "react-native-simple-radio-button";
-import RegistrationStyles from "../Registration/RegistrationStyles";
-import DatePicker from "react-native-datepicker";
 import Button from "../../components/Button/Button";
+import RadioForm from "react-native-simple-radio-button";
 
 class NewProductPage extends Component {
+
+    product_types = [
+        {label: 'Étel', value: 0},
+        {label: 'Ital', value: 1},
+    ];
+
+    intake = [
+        {label: 'Reggeli', value: 0},
+        {label: 'Ebéd', value: 1},
+        {label: 'Vacsora', value: 2},
+    ];
 
     constructor(props) {
         super(props);
@@ -17,7 +26,7 @@ class NewProductPage extends Component {
             productName: '',
             amount: '',
             amountType: '',     // kg/liter/doboz...
-            productType: '',    // étel/ital
+            productType: 0,    // étel/ital
             dateOfEating: '',
             calorie: '',
             fat: '',
@@ -39,7 +48,7 @@ class NewProductPage extends Component {
     render() {
         return (
             <View style={AppStyles.container}>
-                <Header label={'Kérem töltse ki adatait'} />
+                <Header label={'Kérem töltse ki adatait'} onPress={() => this.props.navigation.openDrawer()} drawer={true}/>
                 <ScrollView style={AppStyles.scroll}>
                     <Container>
                         <Label text="Termék neve" />
@@ -71,31 +80,22 @@ class NewProductPage extends Component {
                     </Container>
                     <Container>
                         <Label text="Termék típus" />
-                        <TextInput
-                            placeholder={"Étel/Ital"}
-                            style={AppStyles.textInput}
-                            onChangeText={(productType) => this.setState({ productType: productType })}
-                            value={this.state.productType}
-                        />
+                        <RadioForm style={AppStyles.radio}
+                                   formHorizontal={true}
+                                   radio_props={this.product_types}
+                                   initial={0} onPress={(value) => this.state.productType = value}/>
+                    </Container>
+
+                    <Container>
+                        <Label text="Étkezés ideje" />
+                        <RadioForm style={AppStyles.radio}
+                                   formHorizontal={true}
+                                   radio_props={this.intake}
+                                   initial={0} onPress={(value) => this.state.dateOfEating = value}/>
                     </Container>
 
                     {/*TODO Órát is kéne menteni -> DailyViewPageben és OverviewPageben lévő TODO*/}
-                    <Container>
-                        <Label text="Étkezés időpontja"/>
-                        <DatePicker
-                            style={RegistrationStyles.datePicker}
-                            date={this.state.dateOfEating}
-                            mode="date"
-                            placeholder={this.state.dateOfEating}
-                            format="YYYY-MM-DD"
-                            minDate="1900-01-01"
-                            maxDate="2015-01-01"
-                            confirmBtnText="Ok"
-                            cancelBtnText="Mégse"
-                            onDateChange={(dateOfEating) => {this.setState({dateOfEating: dateOfEating})}}
-                            customStyles={{ dateIcon:{display: 'none'} }}
-                        />
-                    </Container>
+
                     <Container>
                         <Label text="Kalória" />
                         <TextInput

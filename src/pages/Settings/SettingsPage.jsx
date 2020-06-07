@@ -15,6 +15,11 @@ import {cos} from "react-native-reanimated";
 
 class SettingsPage extends Component {
 
+    radio_props = [
+        {label: 'Férfi', value: 0},
+        {label: 'Nő', value: 1}
+    ];
+
     constructor(props) {
         super(props);
         this.state = {
@@ -45,7 +50,7 @@ class SettingsPage extends Component {
     render() {
         return (
             <View style={AppStyles.container}>
-                <Header label={'Beállítások'} menu={true} />
+                <Header label={'Beállítások'} onPress={() => this.props.navigation.openDrawer()} drawer={true}/>
                 <ScrollView style={AppStyles.scroll}>
                     <Container>
                         <Label text="Új jelszó" />
@@ -87,7 +92,7 @@ class SettingsPage extends Component {
                     </Container>
                     <Container>
                         <Label text="Nem" />
-                        <RadioForm style={RegistrationStyles.radio}
+                        <RadioForm style={AppStyles.radio}
                                    formHorizontal={true}
                                    radio_props={this.radio_props}
                                    initial={0} onPress={(value) => this.state.sex = value}/>

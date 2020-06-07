@@ -17,6 +17,7 @@ function App() {
   return (
       <NavigationContainer>
           <Drawer.Navigator initialRouteName="Home">
+              <Drawer.Screen name="Bejelentkezés" component={LoginPage} />
               <Drawer.Screen name="Áttekintés" component={OverviewPage} />
               <Drawer.Screen name="Cél beállítása" component={SetGoalPage} />
               <Drawer.Screen name="Mai teljesítmény" component={DailyViewPage} />

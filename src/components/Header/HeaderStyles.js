@@ -12,9 +12,6 @@ const HeaderStyles = StyleSheet.create({
     image:{
         width: 35,
         height: 35,
-        position: 'absolute',
-        alignSelf: 'center',
-        right: 20,
     },
     imageBg: {
         width: null,
@@ -23,6 +20,11 @@ const HeaderStyles = StyleSheet.create({
         flexDirection: "row",
         paddingVertical: 20,
         paddingHorizontal: 15,
+    },
+    iconTouch:{
+        position: 'absolute',
+        alignSelf: 'center',
+        right: 20,
     },
 });
 

@@ -47,7 +47,8 @@ class OverviewPage extends Component {
     render() {
         return (
             <View style={AppStyles.container}>
-                <Header label={'Mai teljesítmény'} menu={true} />
+                <Header label={'Áttekintés'} onPress={() => this.props.navigation.openDrawer()} drawer={true}/>
+                {console.log(this.props.navigation)}
                 <ScrollView style={AppStyles.scroll}>
                     <Container>
                         <Label text="Feltöltés alatt" />

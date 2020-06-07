@@ -32,10 +32,11 @@ class RegistrationPage extends Component {
         }
     }
 
+    today = new Date().toJSON().slice(0,10).replace(/-/g,'-');
     render() {
         return (
             <View style={AppStyles.container}>
-                <Header label={'Kérem töltse ki adatait'} />
+                <Header label={'Regisztráció'} drawer={false}/>
                 <ScrollView style={AppStyles.scroll}>
                     <Container>
                         <Label text="E-mail" />
@@ -77,7 +78,7 @@ class RegistrationPage extends Component {
 
                     <Container>
                         <Label text="Nem" />
-                        <RadioForm style={RegistrationStyles.radio}
+                        <RadioForm style={AppStyles.radio}
                                    formHorizontal={true}
                                    radio_props={this.radio_props}
                                    initial={0} onPress={(value) => this.state.sex = value}/>
@@ -97,13 +98,13 @@ class RegistrationPage extends Component {
                     <Container>
                         <Label text="Születési dátum"/>
                         <DatePicker
-                            style={RegistrationStyles.datePicker}
+                            style={AppStyles.datePicker}
                             date={this.state.birth}
                             mode="date"
                             placeholder={this.state.birth}
                             format="YYYY-MM-DD"
                             minDate="1900-01-01"
-                            maxDate="2015-01-01"
+                            maxDate={this.today}
                             confirmBtnText="Ok"
                             cancelBtnText="Mégse"
                             onDateChange={(birth) => {this.setState({birth: birth})}}
@@ -152,12 +153,15 @@ class RegistrationPage extends Component {
                 await AsyncStorage.setItem("users", JSON.stringify(users))
                     .then(() => {
                         console.log("User was saved successfully");
+                        alert('Sikeres regisztráció');
+                        this.props.navigation.navigate('Bejelentkezés');
                     })
                     .catch(() => {
                         console.log("There was an error saving the user");
                     })
             } else {
                 console.log("There is a registered user with this email");
+                alert('Van már felhasználó ezzel az e-mail címmel vagy hiányzó adatok');
             }
        // }
     }
