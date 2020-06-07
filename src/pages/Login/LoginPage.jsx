@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TextInput, ScrollView } from 'react-native';
+import { View, TextInput, ScrollView,AsyncStorage } from 'react-native';
 
 import AppStyles from "../../../styles";
 import LoginStyles from "./LoginStyles";
@@ -11,6 +11,15 @@ import Label from '../../components/Label/Label';
 import Header from "../../components/Header/Header";
 
 class LoginPage extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            email :'',
+            password : ''
+        };
+    }
+
     render() {
         return (
             <View style={AppStyles.container}>
@@ -21,6 +30,8 @@ class LoginPage extends Component {
                         <TextInput
                             placeholder={"teszt@gmail.com"}
                             style={AppStyles.textInput}
+                            onChangeText={(email) => this.setState({ email: email })}
+                            value={this.state.email}
                         />
                     </Container>
                     <Container>
@@ -29,6 +40,8 @@ class LoginPage extends Component {
                             placeholder={"***********"}
                             secureTextEntry={true}
                             style={AppStyles.textInput}
+                            onChangeText={(password) => this.setState({ password: password })}
+                            value={this.state.password}
                         />
                     </Container>
 
@@ -49,8 +62,22 @@ class LoginPage extends Component {
         );
     }
 
-    login(){
-        alert('login')
+    async login(){
+        const existingUsers  = await AsyncStorage.getItem("users");
+        const users = JSON.parse(existingUsers);
+        const user = users.filter(user => user.email == this.state.email && user.password == this.state.password)[0];
+
+        if(user != null){
+            await AsyncStorage.setItem("logged_in_user", JSON.stringify(user) )
+                .then( ()=>{
+                    console.log("Login was successfully");
+                } )
+                .catch( ()=>{
+                    console.log("There was an error to login");
+                } )
+        } else {
+            console.log("Invalid email/password");
+        }
     }
 
     registration(){
