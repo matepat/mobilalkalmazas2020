@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TextInput, ScrollView } from 'react-native';
+import { Text, View, TextInput, ScrollView,AsyncStorage  } from 'react-native';
 import RadioForm from 'react-native-simple-radio-button';
 import DatePicker from 'react-native-datepicker';
 
@@ -22,8 +22,13 @@ class RegistrationPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            gender: 0,
-            date: "2000-01-01",
+            birth: "2000-01-01",
+            email :'',
+            firstName :'',
+            lastName :'',
+            sex : 0,
+            height :'',
+            password : ''
         }
     }
 
@@ -37,6 +42,8 @@ class RegistrationPage extends Component {
                         <TextInput
                             placeholder={"teszt@gmail.com"}
                             style={AppStyles.textInput}
+                            onChangeText={(email) => this.setState({ email: email })}
+                            value={this.state.email}
                         />
                     </Container>
                     <Container>
@@ -45,6 +52,8 @@ class RegistrationPage extends Component {
                             placeholder={"***********"}
                             secureTextEntry={true}
                             style={AppStyles.textInput}
+                            onChangeText={(password) => this.setState({ password: password })}
+                            value={this.state.password}
                         />
                     </Container>
                     <Container>
@@ -52,6 +61,8 @@ class RegistrationPage extends Component {
                         <TextInput
                             placeholder={"Kiss"}
                             style={AppStyles.textInput}
+                            onChangeText={(lastName) => this.setState({ lastName: lastName })}
+                            value={this.state.lastName}
                         />
                     </Container>
                     <Container>
@@ -59,12 +70,17 @@ class RegistrationPage extends Component {
                         <TextInput
                             placeholder={"Béla"}
                             style={AppStyles.textInput}
+                            onChangeText={(firstName) => this.setState({ firstName: firstName })}
+                            value={this.state.firstName}
                         />
                     </Container>
 
                     <Container>
                         <Label text="Nem" />
-                        <RadioForm style={RegistrationStyles.radio} formHorizontal={true} radio_props={this.radio_props} initial={0} onPress={(value) => this.state.gender=value}/>
+                        <RadioForm style={RegistrationStyles.radio}
+                                   formHorizontal={true}
+                                   radio_props={this.radio_props}
+                                   initial={0} onPress={(value) => this.state.sex = value}/>
                     </Container>
 
                     <Container>
@@ -73,6 +89,8 @@ class RegistrationPage extends Component {
                             placeholder={"184"}
                             style={AppStyles.textInput}
                             keyboardType = 'numeric'
+                            onChangeText={(height) => this.setState({ height: height })}
+                            value={this.state.height}
                         />
                     </Container>
 
@@ -80,15 +98,15 @@ class RegistrationPage extends Component {
                         <Label text="Születési dátum"/>
                         <DatePicker
                             style={RegistrationStyles.datePicker}
-                            date={this.state.date}
+                            date={this.state.birth}
                             mode="date"
-                            placeholder={this.state.date}
+                            placeholder={this.state.birth}
                             format="YYYY-MM-DD"
                             minDate="1900-01-01"
                             maxDate="2015-01-01"
                             confirmBtnText="Ok"
                             cancelBtnText="Mégse"
-                            onDateChange={(date) => {this.setState({date: date})}}
+                            onDateChange={(birth) => {this.setState({birth: birth})}}
                             customStyles={{ dateIcon:{display: 'none'} }}
                         />
                     </Container>
@@ -103,8 +121,45 @@ class RegistrationPage extends Component {
         );
     }
 
-    registration(){
-        alert('reg');
+    registration = async () => {
+        /*if(
+            this.state.email &&
+            this.state.password &&
+            this.state.lastName &&
+            this.state.firstName &&
+            this.state.sex &&
+            this.state.birth &&
+            this.state.height != null
+        ) {*/
+            const user = {
+                email: this.state.email,
+                firstName: this.state.firstName,
+                lastName: this.state.lastName,
+                sex: this.state.sex,
+                height: this.state.height,
+                birth: this.state.birth,
+                password: this.state.password
+            }
+
+            const existingUsers = await AsyncStorage.getItem("users");
+            let users = JSON.parse(existingUsers);
+            if (!users) {
+                users = [];
+            }
+
+            if (users.filter(user => user.email == this.state.email) == null) {
+                users.push(user);
+                await AsyncStorage.setItem("users", JSON.stringify(users))
+                    .then(() => {
+                        console.log("User was saved successfully");
+                    })
+                    .catch(() => {
+                        console.log("There was an error saving the user");
+                    })
+            } else {
+                console.log("There is a registered user with this email");
+            }
+       // }
     }
 }
 
